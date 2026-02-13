@@ -1,0 +1,594 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* ====================================
+   BASE STYLES
+   ==================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-poppins text-batik-brown bg-batik-cream;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-playfair text-batik-brown;
+  }
+}
+
+/* ====================================
+   MOTIF BATIK ELEGAN
+   ==================================== */
+
+/* ✨ MOTIF BATIK KAWUNG - ELEGAN & PREMIUM */
+.bg-batik-kawung {
+  background-color: #684f33;
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(212, 165, 116, 0.08) 4px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(212, 165, 116, 0.08) 6px,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(232, 201, 168, 0.06) 3px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(180, 92, 76, 0.05) 5px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(199, 160, 59, 0.07) 4px,
+      transparent 4px
+    );
+  background-size: 60px 60px;
+}
+
+/* ✨ MOTIF BATIK PARANG - MODERN MINIMALIS */
+.bg-batik-parang {
+  background-color: #684f33;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(212, 165, 116, 0.06) 0px,
+      rgba(212, 165, 116, 0.06) 2px,
+      transparent 2px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(232, 201, 168, 0.04) 0px,
+      rgba(232, 201, 168, 0.04) 2px,
+      transparent 2px,
+      transparent 12px
+    );
+  background-size: 30px 30px;
+}
+
+/* ✨ MOTIF BATIK MEGAMENDUNG - FLOWING & ELEGAN */
+.bg-batik-megamendung {
+  background-color: #684f33;
+  background-image:
+    radial-gradient(
+      ellipse at 30% 40%,
+      rgba(212, 165, 116, 0.07) 15%,
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 70% 60%,
+      rgba(232, 201, 168, 0.06) 20%,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 50% 20%,
+      rgba(199, 160, 59, 0.05) 10%,
+      transparent 25%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      rgba(180, 92, 76, 0.04) 12%,
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 10% 70%,
+      rgba(212, 165, 116, 0.05) 8%,
+      transparent 20%
+    );
+  background-size: 200px 200px;
+}
+
+/* ✨ MOTIF BATIK TRUNTUM - TRADISIONAL ELEGAN */
+.bg-batik-truntum {
+  background-color: #684f33;
+  background-image:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(212, 165, 116, 0.07) 3px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(232, 201, 168, 0.07) 4px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(199, 160, 59, 0.06) 5px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 90% 30%,
+      rgba(180, 92, 76, 0.05) 3px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(212, 165, 116, 0.06) 4px,
+      transparent 4px
+    );
+  background-size: 50px 50px;
+}
+
+/* ✨ MOTIF BATIK LASEM - HALUS & PREMIUM (UNTUK FOOTER) */
+.bg-batik-lasem {
+  background-color: #3d2e1f; /* Darker brown untuk footer */
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(212, 165, 116, 0.06) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(232, 201, 168, 0.06) 3px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(199, 160, 59, 0.05) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(180, 92, 76, 0.04) 4px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(212, 165, 116, 0.05) 2px,
+      transparent 2px
+    );
+  background-size: 30px 30px;
+}
+
+/* ✨ OVERLAY UNTUK READABILITY */
+.batik-overlay-light {
+  position: relative;
+  isolation: isolate;
+}
+
+.batik-overlay-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(253, 248, 243, 0.92);
+  z-index: -1;
+}
+
+.batik-overlay-dark {
+  position: relative;
+  isolation: isolate;
+}
+
+.batik-overlay-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(61, 46, 31, 0.95),
+    rgba(61, 46, 31, 0.92)
+  );
+  z-index: -1;
+}
+
+/* ✨ BORDER BATIK UNTUK FOOTER */
+.footer-border-batik {
+  position: relative;
+  border-top: 4px solid #d4a574;
+}
+
+.footer-border-batik::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #d4a574 0px,
+    #d4a574 8px,
+    transparent 8px,
+    transparent 16px,
+    #b8935e 16px,
+    #b8935e 24px,
+    transparent 24px,
+    transparent 32px
+  );
+}
+
+/* ====================================
+   COMPONENTS
+   ==================================== */
+@layer components {
+  /* ---------- CONTAINER ---------- */
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .section-padding {
+    @apply py-12 sm:py-16 lg:py-24;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg 
+           font-semibold transition-all duration-300 ease-out
+           focus:outline-none focus:ring-2 focus:ring-offset-2 
+           disabled:opacity-50 disabled:cursor-not-allowed
+           active:scale-95;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark 
+           focus:ring-primary/50 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-dark
+           focus:ring-secondary shadow-lg hover:shadow-xl;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary 
+           hover:text-white focus:ring-primary/50;
+  }
+
+  /* ---------- BUTTON RAMADAN ---------- */
+  .btn-ramadan-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 
+           bg-gradient-to-r from-[#0F5959] to-[#2D5A4B]
+           text-white font-semibold rounded-full
+           transition-all duration-300 hover:shadow-2xl
+           hover:scale-105 active:scale-95;
+    box-shadow: 0 10px 15px -3px rgba(15, 89, 89, 0.3);
+  }
+
+  .btn-ramadan-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 
+           bg-white text-[#0F5959] border-2 border-[#0F5959]/30
+           font-semibold rounded-full
+           transition-all duration-300 hover:bg-[#0F5959] 
+           hover:text-white hover:border-transparent
+           hover:shadow-lg;
+  }
+
+  /* ---------- BUTTON SUPPORT ---------- */
+  .btn-support {
+    @apply inline-flex items-center justify-center px-8 py-4
+           bg-gradient-to-r from-[#2E5C4E] to-[#3A7B6B]
+           text-white font-semibold rounded-full
+           transition-all duration-300 hover:shadow-2xl
+           hover:scale-105 active:scale-95;
+    box-shadow: 0 10px 20px -5px rgba(46, 92, 78, 0.3);
+  }
+
+  /* ---------- CARDS ---------- */
+  .card {
+    @apply bg-white rounded-2xl shadow-lg transition-all duration-300
+           hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  .product-card {
+    @apply card overflow-hidden group relative;
+  }
+
+  /* ---------- CARD RAMADAN ---------- */
+  .card-ramadan {
+    @apply relative overflow-hidden rounded-3xl bg-gradient-to-br 
+           from-[#FFF8E7] to-[#F5E6D3] border-2 border-[#C7A03B]/20
+           shadow-2xl p-8 md:p-12;
+  }
+
+  /* ---------- CARD JAM OPERASIONAL ---------- */
+  .card-hours {
+    @apply bg-[#FCF8F3] rounded-2xl border border-[#EADBC6] 
+           p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow;
+  }
+
+  /* ---------- CARD RESPON CEPAT ---------- */
+  .card-response {
+    @apply bg-white rounded-2xl shadow-xl p-6 md:p-8
+           border border-[#EADBC6]/30;
+    background: linear-gradient(145deg, #ffffff, #fcf8f3);
+  }
+
+  /* ---------- FORM ELEMENTS ---------- */
+  .form-input {
+    @apply w-full px-4 py-3 border border-batik-beige rounded-lg
+           focus:ring-2 focus:ring-primary/30 focus:border-primary/50
+           transition-all duration-200 bg-white;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  .nav-link {
+    @apply text-batik-brown hover:text-primary transition-colors
+           duration-200 relative after:content-[''] after:absolute
+           after:bottom-0 after:left-0 after:w-0 after:h-0.5
+           after:bg-primary after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+
+  .nav-link-active {
+    @apply text-primary after:w-full;
+  }
+
+  /* ---------- BADGES ---------- */
+  .badge-ramadan {
+    @apply inline-flex items-center px-6 py-3 rounded-full text-base font-bold
+           bg-gradient-to-r from-[#0F5959] to-[#2D5A4B] text-white
+           shadow-xl tracking-wide;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-floating {
+    @apply absolute -top-3 -right-3 w-24 h-24 
+           flex items-center justify-center rounded-full
+           animate-float-discount;
+    background: radial-gradient(circle at 30% 30%, #e67a5a, #b45c4c);
+    box-shadow: 0 20px 30px -5px rgba(180, 92, 76, 0.4);
+  }
+
+  /* ---------- DISKON CIRCLE ---------- */
+  .discount-circle {
+    @apply flex items-center justify-center rounded-full;
+    background: radial-gradient(circle at 30% 30%, #e67a5a, #b45c4c);
+    box-shadow: 0 20px 30px -5px rgba(180, 92, 76, 0.4);
+  }
+
+  /* ---------- TITLE RAMADAN ---------- */
+  .title-ramadan {
+    @apply font-playfair text-3xl md:text-4xl font-bold;
+    background: linear-gradient(135deg, #0f5959 0%, #2d5a4b 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ---------- JAM OPERASIONAL ---------- */
+  .hours-header {
+    @apply font-playfair text-2xl font-bold mb-4;
+    color: #2e5c4e;
+  }
+
+  .hours-item {
+    @apply flex items-center justify-between py-2 
+           border-b border-[#EADBC6]/50 last:border-0;
+  }
+
+  .hours-day {
+    @apply font-medium text-[#2E5C4E];
+  }
+
+  .hours-time {
+    @apply text-[#3A7B6B] font-semibold;
+  }
+
+  /* ---------- RESPON CEPAT ---------- */
+  .response-header {
+    @apply font-playfair text-2xl md:text-3xl font-bold mb-6;
+    background: linear-gradient(135deg, #2e5c4e 0%, #3a7b6b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .response-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  .response-card {
+    @apply bg-white rounded-xl p-5 transition-all duration-300
+           hover:shadow-xl hover:-translate-y-1;
+    border: 1px solid #eadbc6;
+  }
+
+  .response-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+  }
+
+  .icon-email {
+    @apply bg-[#2E5C4E]/10 text-[#2E5C4E];
+  }
+
+  .icon-whatsapp {
+    @apply bg-[#25D366]/10 text-[#25D366];
+  }
+
+  .icon-satisfaction {
+    @apply bg-[#B68B40]/10 text-[#B68B40];
+  }
+
+  .response-label {
+    @apply text-sm font-medium text-[#7C9A8F] uppercase tracking-wider;
+  }
+
+  .response-value {
+    @apply font-playfair font-bold mt-1;
+    background: linear-gradient(145deg, #2e5c4e, #3a7b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .response-value-wa {
+    background: linear-gradient(145deg, #25d366, #128c7e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .response-value-highlight {
+    background: linear-gradient(145deg, #b68b40, #daa520);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ---------- BADGE ONLINE PULSE ---------- */
+  .badge-online-pulse {
+    @apply relative flex h-2 w-2;
+  }
+
+  .badge-online-pulse span {
+    @apply animate-ping absolute inline-flex h-full w-full 
+           rounded-full bg-white opacity-75;
+  }
+
+  .badge-online-pulse span:last-child {
+    @apply relative inline-flex rounded-full h-2 w-2 bg-white;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider-elegant {
+    @apply w-full h-px my-6;
+    background: linear-gradient(90deg, transparent, #eadbc6, transparent);
+  }
+
+  /* ---------- LOADING ---------- */
+  .loading-spinner {
+    @apply w-8 h-8 border-4 border-batik-beige border-t-primary
+           rounded-full animate-spin;
+  }
+}
+
+/* ====================================
+   UTILITIES
+   ==================================== */
+@layer utilities {
+  .animate-batik-float {
+    animation: batik-float 60s linear infinite;
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #684f33, #b8935e, #d4a574);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(120deg, #c9944a 0%, #dab88f 50%, #e8c9a8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-elegant {
+    background: linear-gradient(135deg, #684f33 0%, #8b6b4f 70%, #d4a574 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(104, 79, 51, 0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(104, 79, 51, 0.2);
+  }
+
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/80 border border-white/30;
+  }
+
+  .border-elegant {
+    @apply border border-primary/20 hover:border-primary/40 transition-colors;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-batik-cream rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full hover:bg-primary/50;
+  }
+}
+
+/* ====================================
+   RESPONSIVE TYPOGRAPHY
+   ==================================== */
+@media (max-width: 640px) {
+  .text-responsive {
+    font-size: clamp(0.875rem, 4vw, 1rem);
+  }
+
+  .heading-responsive {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+}
+
+/* ====================================
+   PRINT STYLES
+   ==================================== */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
