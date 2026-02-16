@@ -17,7 +17,7 @@ import { useShop } from "../context/ShopContext";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cart, wishlist, logout, user } = useShop();
+  const { cart, wishlist, logout, user, searchQuery } = useShop();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,6 +25,20 @@ const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef(null);
+  const searchInputRef = useRef(null);
+
+  // Sync search input with global search query when modal opens
+  useEffect(() => {
+    if (searchOpen) {
+      setSearchInput(searchQuery || "");
+      // Focus input after a small delay to ensure modal is rendered
+      setTimeout(() => {
+        if (searchInputRef.current) {
+          searchInputRef.current.focus();
+        }
+      }, 100);
+    }
+  }, [searchOpen, searchQuery]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +68,32 @@ const Navbar = () => {
     if (searchInput.trim() !== "") {
       navigate(`/shop?search=${encodeURIComponent(searchInput)}`);
       setSearchOpen(false);
-      setSearchInput("");
+    } else {
+      // If submitted empty, always go to shop page (clear search)
+      navigate("/shop");
+      setSearchOpen(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+
+    // If user clears input AND is on shop page, reset search immediately
+    if (value === "" && location.pathname === "/shop") {
+      navigate("/shop");
+    }
+  };
+
+  const handleClearInput = () => {
+    setSearchInput("");
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+
+    // If clearing and on shop page, reset search immediately
+    if (location.pathname === "/shop") {
+      navigate("/shop");
     }
   };
 
@@ -88,7 +127,7 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* LOGO & BRAND - TAMPIL DI SEMUA LAYAR */}
+            {/* LOGO & BRAND */}
             <div className="flex items-center gap-4">
               <Link
                 to="/"
@@ -105,7 +144,7 @@ const Navbar = () => {
                   />
                 </div>
 
-                {/* ✅ TEKS BRAND - SELALU TAMPIL */}
+                {/* TEKS BRAND */}
                 <div className="leading-tight">
                   <h1 className="text-primary font-semibold tracking-wide text-base xs:text-lg">
                     Batik Nusantara
@@ -193,7 +232,9 @@ const Navbar = () => {
                     </span>
                     <ChevronDown
                       size={16}
-                      className={`transition-transform ${profileOpen ? "rotate-180" : ""}`}
+                      className={`transition-transform ${
+                        profileOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
 
@@ -232,109 +273,122 @@ const Navbar = () => {
         </div>
 
         {/* MOBILE MENU PANEL */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-primary/10 shadow-md">
-            <div className="px-6 py-6 space-y-5 text-primary font-medium">
-              {navLinks.map((link, index) => {
-                const LinkComponent = link.hash ? HashLink : Link;
-                return (
-                  <LinkComponent
-                    key={index}
-                    to={link.path}
-                    smooth={link.hash}
-                    onClick={handleCloseMobile}
-                    className="block hover:text-secondary transition"
-                  >
-                    {link.name}
-                  </LinkComponent>
-                );
-              })}
+        <div
+          className={`lg:hidden bg-white border-t border-primary/10 shadow-md transform transition-all duration-300 ease-in-out origin-top ${
+            mobileMenuOpen
+              ? "scale-y-100 opacity-100 max-h-[500px]"
+              : "scale-y-0 opacity-0 max-h-0"
+          }`}
+        >
+          <div className="px-6 py-6 space-y-5 text-primary font-medium">
+            {navLinks.map((link, index) => {
+              const LinkComponent = link.hash ? HashLink : Link;
+              return (
+                <LinkComponent
+                  key={index}
+                  to={link.path}
+                  smooth={link.hash}
+                  onClick={handleCloseMobile}
+                  className="block hover:text-secondary transition transform hover:translate-x-2 duration-300"
+                >
+                  {link.name}
+                </LinkComponent>
+              );
+            })}
 
-              <div className="pt-4 border-t border-primary/10 flex items-center gap-6 text-xl">
-                <button
-                  onClick={() => {
-                    setSearchOpen(true);
-                    handleCloseMobile();
-                  }}
-                  className="hover:text-secondary"
-                >
-                  <Search />
-                </button>
-                <Link
-                  to="/wishlist"
-                  onClick={handleCloseMobile}
-                  className="hover:text-secondary"
-                >
-                  <Heart />
-                </Link>
-                <Link
-                  to="/cart"
-                  onClick={handleCloseMobile}
-                  className="hover:text-secondary"
-                >
-                  <ShoppingCart />
-                </Link>
-              </div>
-
-              {!user ? (
-                <Link
-                  to="/login"
-                  onClick={handleCloseMobile}
-                  className="inline-flex items-center gap-2 border border-primary/20 px-4 py-2 rounded-full hover:border-secondary hover:text-secondary transition text-sm"
-                >
-                  <User size={16} />
-                  Masuk
-                </Link>
-              ) : (
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    handleCloseMobile();
-                  }}
-                  className="inline-flex items-center gap-2 border border-red-300 text-red-600 px-4 py-2 rounded-full hover:bg-red-50 transition text-sm"
-                >
-                  <LogOut size={16} />
-                  Logout
-                </button>
-              )}
+            <div className="pt-4 border-t border-primary/10 flex items-center gap-6 text-xl">
+              <button
+                onClick={() => {
+                  setSearchOpen(true);
+                  handleCloseMobile();
+                }}
+                className="hover:text-secondary transition-transform hover:scale-110"
+              >
+                <Search />
+              </button>
+              <Link
+                to="/wishlist"
+                onClick={handleCloseMobile}
+                className="hover:text-secondary transition-transform hover:scale-110"
+              >
+                <Heart />
+              </Link>
+              <Link
+                to="/cart"
+                onClick={handleCloseMobile}
+                className="hover:text-secondary transition-transform hover:scale-110"
+              >
+                <ShoppingCart />
+              </Link>
             </div>
+
+            {!user ? (
+              <Link
+                to="/login"
+                onClick={handleCloseMobile}
+                className="inline-flex items-center gap-2 border border-primary/20 px-4 py-2 rounded-full hover:border-secondary hover:text-secondary transition text-sm w-full justify-center"
+              >
+                <User size={16} />
+                Masuk
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  handleCloseMobile();
+                }}
+                className="inline-flex items-center gap-2 border border-red-300 text-red-600 px-4 py-2 rounded-full hover:bg-red-50 transition text-sm w-full justify-center"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            )}
           </div>
-        )}
+        </div>
       </header>
 
       {/* SEARCH MODAL */}
       {searchOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/50 flex items-start justify-center pt-32 px-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl p-6 relative">
+        <div className="fixed inset-0 z-[60] bg-black/50 flex items-start justify-center pt-32 px-4 animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl p-6 relative animate-slide-up">
             <button
               onClick={() => setSearchOpen(false)}
-              className="absolute top-4 right-4 text-primary/60 hover:text-primary"
+              className="absolute top-4 right-4 text-primary/60 hover:text-primary transition-colors bg-batik-cream/50 rounded-full p-1"
             >
               <X size={22} />
             </button>
-            <h3 className="text-lg font-semibold text-primary mb-4">
+            <h3 className="text-xl font-bold text-batik-dark mb-4 font-playfair">
               Cari Produk Batik
             </h3>
             <form onSubmit={handleSearchSubmit}>
-              <div className="relative">
+              <div className="relative group">
                 <Search
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/40"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors"
                   size={20}
                 />
                 <input
+                  ref={searchInputRef}
                   type="text"
                   value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
+                  onChange={handleInputChange}
                   placeholder="Cari batik tulis, kemeja, dress..."
-                  className="w-full border border-primary/20 rounded-full pl-12 pr-5 py-3 focus:outline-none focus:ring-2 focus:ring-secondary/40"
-                  autoFocus
+                  className="w-full border border-primary/20 rounded-xl pl-12 pr-12 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/40 focus:border-primary/50 text-lg transition-all"
                 />
+                {searchInput && (
+                  <button
+                    type="button"
+                    onClick={handleClearInput}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors"
+                  >
+                    <X size={18} />
+                  </button>
+                )}
               </div>
               <button
                 type="submit"
-                className="mt-5 w-full bg-secondary hover:bg-secondary-dark text-white py-3 rounded-full font-medium transition"
+                className="mt-5 w-full bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                Cari
+                Cari Produk
               </button>
             </form>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react"; // Tambah useMemo
 import { useShop } from "../context/ShopContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Heart,
   Eye,
@@ -14,6 +14,7 @@ import { productsData, categories, formatPrice } from "../data/products";
 
 const ShopPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("default");
@@ -25,8 +26,10 @@ const ShopPage = () => {
     toggleWishlist,
     isInWishlist,
     searchQuery,
+    setSearchQuery,
     selectedCategory,
     setSelectedCategory,
+    // clearSearch // if needed, but setSearchQuery("") is enough
   } = useShop();
 
   // PERBAIKAN: Gunakan useMemo untuk filter agar lebih efisien
@@ -82,29 +85,37 @@ const ShopPage = () => {
     return sortedProducts;
   }, [searchQuery, selectedCategory, sortBy, priceRange, selectedRating]); // Tambah dependency
 
-  // Check if coming from category click
+  // Check if coming from category click or search
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const category = params.get("category");
+    const search = params.get("search");
+
     if (category) {
       setSelectedCategory(category);
+    } else {
+      setSelectedCategory("all");
     }
-  }, [location, setSelectedCategory]);
+    
+    if (search) {
+      setSearchQuery(search);
+    } else {
+      setSearchQuery("");
+    }
+  }, [location.search, setSelectedCategory, setSearchQuery]); // Dependency on location.search string only
 
   // Reset filters dengan benar
   const resetFilters = () => {
     setSelectedCategory("all");
+    setSearchQuery(""); // Also clear search
     setSortBy("default");
     setPriceRange({ min: 0, max: 1000000 });
     setSelectedRating(0);
+    // Reset URL to /shop to remove query params
+    navigate("/shop");
   };
 
-  // Handler untuk clear search di context
-  const handleClearSearch = () => {
-    // Jika ada function untuk clear search di context
-    // Tapi karena kita tidak punya, kita reset ke empty string
-    // Atau kita bisa tambahkan ke ShopContext jika perlu
-  };
+
 
   return (
     <>

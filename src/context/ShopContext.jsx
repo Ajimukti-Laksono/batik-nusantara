@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import Notification from "../components/Notification";
 
 // Create context
 const ShopContext = createContext();
@@ -78,7 +79,7 @@ export const ShopProvider = ({ children }) => {
             : item,
         ),
       );
-      showNotification("Jumlah produk di keranjang ditambah!", "success");
+      showNotification(`Jumlah ${product.name} di keranjang ditambah!`, "success");
     } else {
       setCart([
         ...cart,
@@ -88,7 +89,7 @@ export const ShopProvider = ({ children }) => {
           addedAt: new Date().toISOString(),
         },
       ]);
-      showNotification("Produk berhasil ditambahkan ke keranjang!", "success");
+      showNotification(`${product.name} berhasil ditambahkan ke keranjang!`, "success");
     }
   };
 
@@ -107,8 +108,13 @@ export const ShopProvider = ({ children }) => {
 
   // Hapus produk dari cart
   const removeFromCart = (productId) => {
+    const itemToRemove = cart.find((item) => item.id === productId);
     setCart(cart.filter((item) => item.id !== productId));
-    showNotification("Produk dihapus dari keranjang", "info");
+    if (itemToRemove) {
+      showNotification(`${itemToRemove.name} dihapus dari keranjang`, "info");
+    } else {
+      showNotification("Produk dihapus dari keranjang", "info");
+    }
   };
 
   // Kosongkan cart
@@ -123,20 +129,25 @@ export const ShopProvider = ({ children }) => {
 
     if (isInWishlist) {
       setWishlist(wishlist.filter((item) => item.id !== product.id));
-      showNotification("Produk dihapus dari wishlist", "info");
+      showNotification(`${product.name} dihapus dari wishlist`, "info");
     } else {
       setWishlist([
         ...wishlist,
         { ...product, addedAt: new Date().toISOString() },
       ]);
-      showNotification("Produk ditambahkan ke wishlist!", "success");
+      showNotification(`${product.name} ditambahkan ke wishlist!`, "success");
     }
   };
 
   // Hapus dari wishlist
   const removeFromWishlist = (productId) => {
+    const itemToRemove = wishlist.find((item) => item.id === productId);
     setWishlist(wishlist.filter((item) => item.id !== productId));
-    showNotification("Produk dihapus dari wishlist", "info");
+    if (itemToRemove) {
+      showNotification(`${itemToRemove.name} dihapus dari wishlist`, "info");
+    } else {
+      showNotification("Produk dihapus dari wishlist", "info");
+    }
   };
 
   // Cek apakah produk ada di wishlist
@@ -207,7 +218,18 @@ export const ShopProvider = ({ children }) => {
     clearNotification,
   };
 
-  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
+  return (
+    <ShopContext.Provider value={value}>
+      {children}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={clearNotification}
+        />
+      )}
+    </ShopContext.Provider>
+  );
 };
 
 // Export ShopContext untuk digunakan di App.jsx

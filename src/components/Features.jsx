@@ -2,6 +2,30 @@ import React from 'react';
 import { MapPin, Shield, Clock, Home } from 'lucide-react';
 
 const Features = () => {
+  const [isVisible, setIsVisible] = React.useState(false);
+  const sectionRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const features = [
     {
       id: 1,
@@ -34,7 +58,7 @@ const Features = () => {
   ];
 
   return (
-    <section className="section-padding bg-gradient-to-br from-batik-cream via-white to-batik-cream">
+    <section ref={sectionRef} className="section-padding bg-gradient-to-br from-batik-cream via-white to-batik-cream">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => {
@@ -42,8 +66,10 @@ const Features = () => {
             return (
               <div
                 key={feature.id}
-                className="text-center space-y-4 p-8 rounded-2xl bg-gradient-to-br from-white to-batik-cream/50 border border-batik-beige/50 shadow-md hover:shadow-xl hover:shadow-secondary/10 transition-all duration-300 group transform hover:scale-105"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`text-center space-y-4 p-8 rounded-2xl bg-gradient-to-br from-white to-batik-cream/50 border border-batik-beige/50 shadow-md hover:shadow-xl hover:shadow-secondary/10 transition-all duration-700 group transform hover:scale-105 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className={`w-20 h-20 mx-auto bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-secondary/20`}>
                   <Icon size={36} className="text-white drop-shadow-lg" />
