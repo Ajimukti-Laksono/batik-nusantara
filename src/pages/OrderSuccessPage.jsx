@@ -29,10 +29,10 @@ const OrderSuccessPage = () => {
       const pageHeight = doc.internal.pageSize.height;
 
       // Colors matching Batik Nusantara theme
-      const primaryColor = [104, 79, 51]; // #684F33
-      const secondaryColor = [212, 165, 116]; // #D4A574
-      const textDark = [61, 46, 31]; // #3D2E1F
-      const textLight = [104, 79, 51]; // #684F33
+      const primaryColor = [11, 48, 29]; // #0B301D
+      const secondaryColor = [212, 175, 55]; // #D4AF37
+      const textDark = [8, 36, 21]; // #082415
+      const textLight = [11, 48, 29]; // #0B301D
 
       // Header - Company Name
       doc.setFillColor(...primaryColor);

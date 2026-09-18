@@ -10,7 +10,7 @@ import {
   SlidersHorizontal,
   X,
 } from "lucide-react";
-import { productsData, categories, formatPrice } from "../data/products";
+import { formatPrice } from "../data/products";
 
 const ShopPage = () => {
   const location = useLocation();
@@ -29,12 +29,14 @@ const ShopPage = () => {
     setSearchQuery,
     selectedCategory,
     setSelectedCategory,
-    // clearSearch // if needed, but setSearchQuery("") is enough
+    products,
+    categories,
+    loading
   } = useShop();
 
   // PERBAIKAN: Gunakan useMemo untuk filter agar lebih efisien
   const filteredProducts = useMemo(() => {
-    let filtered = productsData;
+    let filtered = products;
 
     // Filter by category - PERBAIKAN: "all" menampilkan semua
     if (selectedCategory && selectedCategory !== "all") {
@@ -397,24 +399,29 @@ const ShopPage = () => {
                           {product.name}
                         </h3>
 
-                        {/* Rating */}
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                size={14}
-                                className={`${
-                                  i < product.rating
-                                    ? "text-gold fill-gold"
-                                    : "text-gray-300"
-                                }`}
-                              />
-                            ))}
+                        {/* Rating and Stock */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  size={14}
+                                  className={`${
+                                    i < product.rating
+                                      ? "text-gold fill-gold"
+                                      : "text-gray-300"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-sm text-batik-brown/60">
+                              ({product.reviews} ulasan)
+                            </span>
                           </div>
-                          <span className="text-sm text-batik-brown/60">
-                            ({product.reviews})
-                          </span>
+                          <div className="text-sm">
+                            Stok: <span className="font-bold text-primary">{product.stock}</span>
+                          </div>
                         </div>
 
                         {/* Price */}

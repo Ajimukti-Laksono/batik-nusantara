@@ -19,6 +19,57 @@ export const ShopProvider = ({ children }) => {
   const [notification, setNotification] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([
+    { id: "all", name: "Semua Produk", description: "Lihat semua koleksi batik kami" }
+  ]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch data from Laravel Backend API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [prodRes, catRes] = await Promise.all([
+          fetch('http://localhost:8000/api/storefront/products'),
+          fetch('http://localhost:8000/api/storefront/categories')
+        ]);
+        
+        const prodData = await prodRes.json();
+        const catData = await catRes.json();
+
+        if (prodData.success) {
+          const mappedProducts = prodData.data.map(p => {
+            const slugify = (text) => text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+            const fallbackImage = `/images/products/${slugify(p.name)}.jpg`;
+            
+            return {
+              ...p,
+              category: p.category ? p.category.slug : 'lainnya',
+              categoryName: p.category ? p.category.name : 'Lainnya',
+              image: p.image && !p.image.startsWith('http') 
+                ? `http://localhost:8000/storage/${p.image}` 
+                : p.image || fallbackImage,
+              rating: 5,
+              reviews: Math.floor(Math.random() * 100) + 10,
+            };
+          });
+          setProducts(mappedProducts);
+        }
+
+        if (catData.success) {
+          setCategories([
+            { id: "all", name: "Semua Produk", description: "Lihat semua koleksi batik kami" },
+            ...catData.data.map(c => ({ id: c.slug, name: c.name, description: c.description }))
+          ]);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Load data dari localStorage saat pertama kali load
   useEffect(() => {
@@ -194,6 +245,9 @@ export const ShopProvider = ({ children }) => {
     notification,
     searchQuery,
     selectedCategory,
+    products,
+    categories,
+    loading,
 
     // Setters
     setSearchQuery,

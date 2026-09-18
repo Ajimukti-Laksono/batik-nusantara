@@ -33,7 +33,7 @@ const Notification = ({ message, type = "success", onClose }) => {
     info: {
       icon: Info,
       // Primary brown
-      bgColor: "bg-[#684F33]",
+      bgColor: "bg-[#0B301D]",
       borderColor: "border-[#8B6B4F]",
       textColor: "text-white",
       iconColor: "text-[#F0E6DC]",
@@ -41,8 +41,8 @@ const Notification = ({ message, type = "success", onClose }) => {
     warning: {
       icon: Info,
       // Gold/Amber
-      bgColor: "bg-[#B8935E]",
-      borderColor: "border-[#D4A574]",
+      bgColor: "bg-[#7A6B39]",
+      borderColor: "border-[#D4AF37]",
       textColor: "text-white",
       iconColor: "text-[#FCF8F3]",
     },

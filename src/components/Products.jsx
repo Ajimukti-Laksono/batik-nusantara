@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Heart, Eye, ShoppingCart, Star } from "lucide-react";
 import { useShop } from "../context/ShopContext";
-import { productsData, formatPrice } from "../data/products";
+import { formatPrice } from "../data/products";
 
 const Products = () => {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState(productsData);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loadingImages, setLoadingImages] = useState({});
 
   const {
@@ -16,11 +16,13 @@ const Products = () => {
     selectedCategory,
     setSearchQuery,
     setSelectedCategory,
+    products,
+    loading
   } = useShop();
 
   // Filter products
   useEffect(() => {
-    let filtered = productsData;
+    let filtered = products;
     if (selectedCategory && selectedCategory !== "all") {
       filtered = filtered.filter((p) => p.category === selectedCategory);
     }
@@ -29,11 +31,11 @@ const Products = () => {
         (p) =>
           p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.categoryName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase()),
+          (p.description && p.description.toLowerCase().includes(searchQuery.toLowerCase())),
       );
     }
     setFilteredProducts(filtered);
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, products]);
 
   const handleImageError = (productId, e) => {
     console.error(
@@ -200,7 +202,7 @@ const Products = () => {
 
               <div className="text-center mt-12">
                 <button className="btn btn-secondary">
-                  Lihat Semua Produk ({productsData.length})
+                  Lihat Semua Produk ({products.length})
                 </button>
               </div>
             </>

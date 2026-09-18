@@ -106,7 +106,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: "Home", path: "/" },
+    { name: "Home", path: "/#home", hash: true },
     { name: "Shop", path: "/shop" },
     { name: "Koleksi", path: "/#koleksi", hash: true },
     { name: "Tentang", path: "/#tentang", hash: true },
@@ -114,7 +114,7 @@ const Navbar = () => {
   ];
 
   const isActiveLink = (path) => {
-    if (path === "/") return location.pathname === "/";
+    if (path === "/" || path === "/#home") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
 
@@ -136,11 +136,11 @@ const Navbar = () => {
               >
                 {/* LOGO WITH GLOW */}
                 <div className="relative flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full blur-xl opacity-60 bg-[#684F33] animate-pulse-slow" />
+                  <div className="absolute inset-0 rounded-full blur-xl opacity-60 bg-[#0B301D] animate-pulse-slow" />
                   <img
                     src="/images/logo.png"
                     alt="Batik Nusantara Logo"
-                    className="relative h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(104,79,51,0.65)]"
+                    className="relative h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(11,48,29,0.65)]"
                   />
                 </div>
 

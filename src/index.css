@@ -31,16 +31,16 @@
 
 /* ✨ MOTIF BATIK KAWUNG - ELEGAN & PREMIUM */
 .bg-batik-kawung {
-  background-color: #684f33;
+  background-color: #0B301D;
   background-image:
     radial-gradient(
       circle at 20% 30%,
-      rgba(212, 165, 116, 0.08) 4px,
+      rgba(212, 175, 55, 0.08) 4px,
       transparent 4px
     ),
     radial-gradient(
       circle at 80% 70%,
-      rgba(212, 165, 116, 0.08) 6px,
+      rgba(212, 175, 55, 0.08) 6px,
       transparent 6px
     ),
     radial-gradient(
@@ -63,12 +63,12 @@
 
 /* ✨ MOTIF BATIK PARANG - MODERN MINIMALIS */
 .bg-batik-parang {
-  background-color: #684f33;
+  background-color: #0B301D;
   background-image:
     repeating-linear-gradient(
       45deg,
-      rgba(212, 165, 116, 0.06) 0px,
-      rgba(212, 165, 116, 0.06) 2px,
+      rgba(212, 175, 55, 0.06) 0px,
+      rgba(212, 175, 55, 0.06) 2px,
       transparent 2px,
       transparent 12px
     ),
@@ -84,11 +84,11 @@
 
 /* ✨ MOTIF BATIK MEGAMENDUNG - FLOWING & ELEGAN */
 .bg-batik-megamendung {
-  background-color: #684f33;
+  background-color: #0B301D;
   background-image:
     radial-gradient(
       ellipse at 30% 40%,
-      rgba(212, 165, 116, 0.07) 15%,
+      rgba(212, 175, 55, 0.07) 15%,
       transparent 30%
     ),
     radial-gradient(
@@ -108,7 +108,7 @@
     ),
     radial-gradient(
       ellipse at 10% 70%,
-      rgba(212, 165, 116, 0.05) 8%,
+      rgba(212, 175, 55, 0.05) 8%,
       transparent 20%
     );
   background-size: 200px 200px;
@@ -116,11 +116,11 @@
 
 /* ✨ MOTIF BATIK TRUNTUM - TRADISIONAL ELEGAN */
 .bg-batik-truntum {
-  background-color: #684f33;
+  background-color: #0B301D;
   background-image:
     radial-gradient(
       circle at 25% 25%,
-      rgba(212, 165, 116, 0.07) 3px,
+      rgba(212, 175, 55, 0.07) 3px,
       transparent 3px
     ),
     radial-gradient(
@@ -140,7 +140,7 @@
     ),
     radial-gradient(
       circle at 10% 90%,
-      rgba(212, 165, 116, 0.06) 4px,
+      rgba(212, 175, 55, 0.06) 4px,
       transparent 4px
     );
   background-size: 50px 50px;
@@ -148,11 +148,11 @@
 
 /* ✨ MOTIF BATIK LASEM - HALUS & PREMIUM (UNTUK FOOTER) */
 .bg-batik-lasem {
-  background-color: #3d2e1f; /* Darker brown untuk footer */
+  background-color: #082415; /* Darker brown untuk footer */
   background-image:
     radial-gradient(
       circle at 20% 30%,
-      rgba(212, 165, 116, 0.06) 2px,
+      rgba(212, 175, 55, 0.06) 2px,
       transparent 2px
     ),
     radial-gradient(
@@ -172,7 +172,7 @@
     ),
     radial-gradient(
       circle at 10% 80%,
-      rgba(212, 165, 116, 0.05) 2px,
+      rgba(212, 175, 55, 0.05) 2px,
       transparent 2px
     );
   background-size: 30px 30px;
@@ -203,8 +203,8 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(61, 46, 31, 0.95),
-    rgba(61, 46, 31, 0.92)
+    rgba(8, 36, 21, 0.95),
+    rgba(8, 36, 21, 0.92)
   );
   z-index: -1;
 }
@@ -212,7 +212,7 @@
 /* ✨ BORDER BATIK UNTUK FOOTER */
 .footer-border-batik {
   position: relative;
-  border-top: 4px solid #d4a574;
+  border-top: 4px solid #D4AF37;
 }
 
 .footer-border-batik::after {
@@ -224,12 +224,12 @@
   height: 4px;
   background: repeating-linear-gradient(
     90deg,
-    #d4a574 0px,
-    #d4a574 8px,
+    #D4AF37 0px,
+    #D4AF37 8px,
     transparent 8px,
     transparent 16px,
-    #b8935e 16px,
-    #b8935e 24px,
+    #7A6B39 16px,
+    #7A6B39 24px,
     transparent 24px,
     transparent 32px
   );
@@ -501,7 +501,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(to right, #684f33, #b8935e, #d4a574);
+    background: linear-gradient(to right, #0B301D, #7A6B39, #D4AF37);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -515,18 +515,18 @@
   }
 
   .text-gradient-elegant {
-    background: linear-gradient(135deg, #684f33 0%, #8b6b4f 70%, #d4a574 100%);
+    background: linear-gradient(135deg, #0B301D 0%, #8b6b4f 70%, #D4AF37 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(104, 79, 51, 0.1);
+    text-shadow: 0 1px 2px rgba(11, 48, 29, 0.1);
   }
 
   .text-shadow-lg {
-    text-shadow: 0 4px 8px rgba(104, 79, 51, 0.2);
+    text-shadow: 0 4px 8px rgba(11, 48, 29, 0.2);
   }
 
   .line-clamp-1 {

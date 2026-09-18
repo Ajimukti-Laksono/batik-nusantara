@@ -156,7 +156,9 @@ const HomePage = () => {
       </section>
 
       {/* KOMPONEN SUPPORT SECTION */}
-      <SupportSection />
+      <div id="kontak">
+        <SupportSection />
+      </div>
     </div>
   );
 };

@@ -4,82 +4,82 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ✨ ELEGANT BROWN - WARNA UTAMA
+        // ✨ ELEGANT GREEN - WARNA UTAMA
         primary: {
-          DEFAULT: "#684F33", // Coklat elegant utama
-          dark: "#4D3A26", // Untuk hover/active
-          light: "#8B6B4F", // Untuk aksen terang
+          DEFAULT: "#0B301D", // Deep Forest Green
+          dark: "#082415", // Untuk hover/active
+          light: "#144229", // Emerald Green (Aksen)
         },
 
-        // ✨ SECONDARY - GOLD WARM
+        // ✨ SECONDARY - LUXURY GOLD
         secondary: {
-          DEFAULT: "#D4A574",
-          dark: "#B8935E",
-          light: "#E8C9A8",
+          DEFAULT: "#D4AF37", // Classic Metallic Gold
+          dark: "#7A6B39", // Dark Gold / Olive Tint
+          light: "#C5A059", // Warm Gold
         },
 
-        accent: "#C9944A",
-        gold: "#DAB88F",
+        accent: "#D4AF37",
+        gold: "#C5A059",
 
         // ✨ BATIK COLOR PALETTE
         batik: {
-          cream: "#FDF8F3",
-          beige: "#F0E6DC",
-          brown: "#684F33",
-          dark: "#3D2E1F", // Untuk footer
-          sand: "#E6D5C3",
-          mocha: "#8D6E4F",
+          cream: "#FAF8F6",
+          beige: "#F2EBE1",
+          brown: "#0B301D", // Deep Forest Green instead of brown
+          dark: "#082415", // Footer
+          sand: "#E5DDD5",
+          mocha: "#D4AF37", // Gold instead of mocha
         },
 
         bronze: {
-          light: "#CD9F6B",
-          DEFAULT: "#B8935E",
-          dark: "#8B6F47",
+          light: "#E8D8A3",
+          DEFAULT: "#C5A059",
+          dark: "#4A4523",
         },
 
         // ✨ WARNA RAMADAN & DISKON
         ramadan: {
-          teal: "#0F5959",
-          gold: "#C7A03B",
-          cream: "#FFF8E7",
-          sand: "#F5E6D3",
-          wine: "#7A3E3E",
-          emerald: "#2D5A4B",
+          teal: "#0B301D",
+          gold: "#D4AF37",
+          cream: "#FAF8F6",
+          sand: "#F2EBE1",
+          wine: "#7A6B39",
+          emerald: "#144229",
         },
 
         // ✨ WARNA DISKON
         discount: {
-          red: "#B45C4C",
-          gold: "#DAA520",
-          burgundy: "#6F2C3C",
-          coral: "#E67A5A",
+          red: "#C84B31",
+          gold: "#D4AF37",
+          burgundy: "#7A6B39",
+          coral: "#144229",
         },
 
         // ✨ WARNA SUPPORT
         support: {
-          green: "#2E5C4E",
-          teal: "#3A7B6B",
-          mint: "#E8F3F1",
-          sage: "#7C9A8F",
-          cream: "#FFF9F0",
+          green: "#0B301D",
+          teal: "#144229",
+          mint: "#F2F9F5",
+          sage: "#4A4523",
+          cream: "#FAF8F6",
         },
 
         response: {
-          fast: "#2E5C4E",
-          medium: "#7C9A8F",
-          highlight: "#DAA520",
+          fast: "#144229",
+          medium: "#D4AF37",
+          highlight: "#C5A059",
         },
 
         hours: {
-          bg: "#FCF8F3",
-          border: "#EADBC6",
-          text: "#4A5C4C",
+          bg: "#FAF8F6",
+          border: "#E5DDD5",
+          text: "#0B301D",
         },
 
         badge: {
-          email: "#2E5C4E",
+          email: "#144229",
           whatsapp: "#25D366",
-          satisfaction: "#B68B40",
+          satisfaction: "#D4AF37",
         },
       },
 
@@ -95,11 +95,11 @@ export default {
         "batik-radial":
           "radial-gradient(circle at center, var(--tw-gradient-stops))",
         "warm-gradient":
-          "linear-gradient(120deg, #3D2E1F 0%, #684F33 50%, #D4A574 100%)",
-        "ramadan-gradient": "linear-gradient(135deg, #0F5959 0%, #2D5A4B 100%)",
+          "linear-gradient(120deg, #082415 0%, #0B301D 50%, #D4AF37 100%)",
+        "ramadan-gradient": "linear-gradient(135deg, #0B301D 0%, #144229 100%)",
         "discount-gradient":
-          "linear-gradient(145deg, #B45C4C 0%, #6F2C3C 100%)",
-        "support-gradient": "linear-gradient(135deg, #2E5C4E 0%, #3A7B6B 100%)",
+          "linear-gradient(145deg, #C84B31 0%, #7A6B39 100%)",
+        "support-gradient": "linear-gradient(135deg, #0B301D 0%, #144229 100%)",
       },
 
       animation: {

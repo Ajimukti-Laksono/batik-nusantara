@@ -92,7 +92,7 @@ const CheckoutPage = () => {
     doc.text('Batik Nusantara', 20, 20);
     
     doc.setFontSize(12);
-    doc.setTextColor(104, 79, 51); // Batik Brown
+    doc.setTextColor(11, 48, 29); // Batik Brown
     doc.text('Bukti Pemesanan', 20, 28);
 
     // Order Details
@@ -133,7 +133,7 @@ const CheckoutPage = () => {
         startY: 80,
         theme: 'grid',
         styles: { fontSize: 9, cellPadding: 3 },
-        headStyles: { fillColor: [104, 79, 51], textColor: [255, 255, 255] }, // Batik Brown
+        headStyles: { fillColor: [11, 48, 29], textColor: [255, 255, 255] }, // Batik Brown
       });
     } catch (error) {
        console.error("PDF Table generation error", error);
@@ -167,37 +167,67 @@ const CheckoutPage = () => {
 
     setIsProcessing(true);
 
-    // Simulate order processing
-    setTimeout(() => {
-      const orderId = 'ORD-' + Date.now();
-      
-      // Save order to localStorage (in production, send to backend)
-      const order = {
-        orderId,
-        user: user,
-        items: cart,
-        shipping: shippingData,
-        paymentMethod,
-        shippingMethod,
-        subtotal,
-        shippingCost,
-        total,
-        status: 'pending',
-        createdAt: new Date().toISOString(),
+    try {
+      const checkoutItems = cart.map(item => ({
+        product_id: item.id,
+        quantity: item.quantity
+      }));
+
+      const payload = {
+        customer_name: shippingData.fullName,
+        customer_phone: shippingData.phone,
+        items: checkoutItems,
+        payment_method: paymentMethod
       };
 
-      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-      orders.push(order);
-      localStorage.setItem('orders', JSON.stringify(orders));
+      const response = await fetch('http://localhost:8000/api/storefront/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
 
-      // Clear cart
-      clearCart();
+      const data = await response.json();
 
-      // Navigate to success page
-      showNotification('Pesanan berhasil dibuat!', 'success');
-      navigate(`/order-success/${orderId}`);
+      if (response.ok && data.success) {
+        const orderId = data.data.invoice_number;
+        
+        // Save order to localStorage for UI
+        const order = {
+          orderId,
+          user: user,
+          items: cart,
+          shipping: shippingData,
+          paymentMethod,
+          shippingMethod,
+          subtotal,
+          shippingCost,
+          total,
+          status: 'pending',
+          createdAt: new Date().toISOString(),
+        };
+
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        orders.push(order);
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        // Clear cart
+        clearCart();
+
+        // Navigate to success page
+        showNotification('Pesanan berhasil dibuat!', 'success');
+        navigate(`/order-success/${orderId}`);
+      } else {
+        showNotification(data.message || 'Gagal membuat pesanan', 'error');
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      showNotification('Terjadi kesalahan saat memproses pesanan', 'error');
+    } finally {
       setIsProcessing(false);
-    }, 2000);
+    }
   };
 
   if (!user) {

@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="lg:col-span-4 space-y-6">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="absolute inset-0 rounded-full blur-xl opacity-40 bg-[#D4A574] animate-pulse-slow"></div>
+                <div className="absolute inset-0 rounded-full blur-xl opacity-40 bg-[#D4AF37] animate-pulse-slow"></div>
                 <img
                   src="/images/logo-white.png"
                   alt="Batik Nusantara"
@@ -43,7 +43,7 @@ const Footer = () => {
                 />
               </div>
               <h2 className="font-playfair text-2xl font-bold text-white">
-                Batik <span className="text-[#D4A574]">Nusantara</span>
+                Batik <span className="text-[#D4AF37]">Nusantara</span>
               </h2>
             </div>
 
@@ -59,7 +59,7 @@ const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4A574] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4AF37] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
                 aria-label="Facebook"
               >
                 <Facebook
@@ -71,7 +71,7 @@ const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4A574] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4AF37] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
                 aria-label="Instagram"
               >
                 <Instagram
@@ -83,7 +83,7 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4A574] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4AF37] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
                 aria-label="Twitter"
               >
                 <Twitter
@@ -95,7 +95,7 @@ const Footer = () => {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4A574] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D4AF37] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg group"
                 aria-label="Youtube"
               >
                 <Youtube
@@ -110,7 +110,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <h3 className="font-playfair text-lg font-semibold text-white mb-5 relative inline-block">
               Perusahaan
-              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#D4A574]"></span>
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#D4AF37]"></span>
             </h3>
             <ul className="space-y-3">
               {[
@@ -126,9 +126,9 @@ const Footer = () => {
                     <LinkComponent
                       to={link.path}
                       smooth={link.hash}
-                      className="text-white/70 hover:text-[#D4A574] transition-colors duration-200 flex items-center gap-2 group"
+                      className="text-white/70 hover:text-[#D4AF37] transition-colors duration-200 flex items-center gap-2 group"
                     >
-                      <span className="w-1 h-1 bg-[#D4A574]/50 rounded-full group-hover:w-2 transition-all"></span>
+                      <span className="w-1 h-1 bg-[#D4AF37]/50 rounded-full group-hover:w-2 transition-all"></span>
                       {link.name}
                     </LinkComponent>
                   </li>
@@ -141,7 +141,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <h3 className="font-playfair text-lg font-semibold text-white mb-5 relative inline-block">
               Bantuan
-              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#D4A574]"></span>
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#D4AF37]"></span>
             </h3>
             <ul className="space-y-3">
               {[
@@ -155,9 +155,9 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     to={link.path}
-                    className="text-white/70 hover:text-[#D4A574] transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-white/70 hover:text-[#D4AF37] transition-colors duration-200 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 bg-[#D4A574]/50 rounded-full group-hover:w-2 transition-all"></span>
+                    <span className="w-1 h-1 bg-[#D4AF37]/50 rounded-full group-hover:w-2 transition-all"></span>
                     {link.name}
                   </Link>
                 </li>
@@ -169,7 +169,7 @@ const Footer = () => {
           <div className="lg:col-span-4">
             <h3 className="font-playfair text-lg font-semibold text-white mb-5 relative inline-block">
               Newsletter
-              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#D4A574]"></span>
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-[#D4AF37]"></span>
             </h3>
             <p className="text-white/70 mb-4 text-sm">
               Dapatkan update koleksi terbaru dan penawaran eksklusif langsung
@@ -188,13 +188,13 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Alamat email Anda"
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-10 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#D4A574] focus:border-transparent transition-all"
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-10 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="bg-[#D4A574] hover:bg-[#B8935E] text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap"
+                className="bg-[#D4AF37] hover:bg-[#7A6B39] text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap"
               >
                 Berlangganan
               </button>
@@ -204,14 +204,14 @@ const Footer = () => {
               Dengan mendaftar, Anda menyetujui{" "}
               <Link
                 to="/syarat-ketentuan"
-                className="text-white/80 hover:text-[#D4A574] underline underline-offset-2"
+                className="text-white/80 hover:text-[#D4AF37] underline underline-offset-2"
               >
                 Syarat & Ketentuan
               </Link>{" "}
               dan{" "}
               <Link
                 to="/kebijakan-privasi"
-                className="text-white/80 hover:text-[#D4A574] underline underline-offset-2"
+                className="text-white/80 hover:text-[#D4AF37] underline underline-offset-2"
               >
                 Kebijakan Privasi
               </Link>{" "}
@@ -225,7 +225,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                <MapPin size={18} className="text-[#D4A574]" />
+                <MapPin size={18} className="text-[#D4AF37]" />
               </div>
               <div>
                 <p className="text-white/60 text-xs">ALAMAT</p>
@@ -236,7 +236,7 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                <Phone size={18} className="text-[#D4A574]" />
+                <Phone size={18} className="text-[#D4AF37]" />
               </div>
               <div>
                 <p className="text-white/60 text-xs">TELEPON</p>
@@ -245,7 +245,7 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                <Clock size={18} className="text-[#D4A574]" />
+                <Clock size={18} className="text-[#D4AF37]" />
               </div>
               <div>
                 <p className="text-white/60 text-xs">JAM OPERASIONAL</p>
@@ -263,20 +263,20 @@ const Footer = () => {
             © {currentYear} Batik Nusantara. All rights reserved. Made with{" "}
             <Heart
               size={14}
-              className="inline text-[#D4A574] fill-current mx-0.5"
+              className="inline text-[#D4AF37] fill-current mx-0.5"
             />{" "}
             for Indonesian Heritage
           </p>
           <div className="flex items-center gap-6">
             <Link
               to="/syarat-ketentuan"
-              className="text-white/60 hover:text-[#D4A574] text-xs transition-colors"
+              className="text-white/60 hover:text-[#D4AF37] text-xs transition-colors"
             >
               Syarat & Ketentuan
             </Link>
             <Link
               to="/kebijakan-privasi"
-              className="text-white/60 hover:text-[#D4A574] text-xs transition-colors"
+              className="text-white/60 hover:text-[#D4AF37] text-xs transition-colors"
             >
               Kebijakan Privasi
             </Link>
