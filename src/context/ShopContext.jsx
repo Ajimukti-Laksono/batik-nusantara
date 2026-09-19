@@ -66,7 +66,6 @@ export const ShopProvider = ({ children }) => {
       } finally {
         setLoading(false);
       }
-    }
   };
 
   useEffect(() => {
@@ -246,9 +245,7 @@ export const ShopProvider = ({ children }) => {
     wishlist,
     notification,
     searchQuery,
-    selectedCategory,
     products,
-    categories,
     loading,
 
     // Categories
