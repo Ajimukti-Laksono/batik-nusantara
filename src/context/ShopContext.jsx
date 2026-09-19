@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import Notification from "../components/Notification";
+import { productsData, categories as mockCategories } from "../data/products";
 
 // Create context
 const ShopContext = createContext();
@@ -19,10 +20,8 @@ export const ShopProvider = ({ children }) => {
   const [notification, setNotification] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([
-    { id: "all", name: "Semua Produk", description: "Lihat semua koleksi batik kami" }
-  ]);
+  const [products, setProducts] = useState(productsData);
+  const [categories, setCategories] = useState(mockCategories);
   const [loading, setLoading] = useState(true);
 
   // Fetch data from Laravel Backend API
