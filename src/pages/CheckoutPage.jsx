@@ -12,7 +12,7 @@ import autoTable from 'jspdf-autotable';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  const { cart, getCartTotal, clearCart, showNotification } = useShop();
+  const { cart, getCartTotal, clearCart, showNotification, refreshProducts } = useShop();
   const [user, setUser] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -225,6 +225,11 @@ const CheckoutPage = () => {
 
       // Clear cart
       clearCart();
+
+      // Refresh product stock from backend so other pages show updated stock immediately
+      if (refreshProducts) {
+        refreshProducts();
+      }
 
       // Navigate to success page
       showNotification('Pesanan berhasil dibuat!', 'success');

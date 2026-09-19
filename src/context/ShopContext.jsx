@@ -25,9 +25,8 @@ export const ShopProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Fetch data from Laravel Backend API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
+  const refreshProducts = async () => {
+    try {
         const API_URL = import.meta.env.VITE_API_URL || 'https://batik-kasir-backend.vercel.app/api';
         const [prodRes, catRes] = await Promise.all([
           fetch(`${API_URL}/storefront/products`),
@@ -67,8 +66,11 @@ export const ShopProvider = ({ children }) => {
       } finally {
         setLoading(false);
       }
-    };
-    fetchData();
+    }
+  };
+
+  useEffect(() => {
+    refreshProducts();
   }, []);
 
   // Load data dari localStorage saat pertama kali load
@@ -249,10 +251,15 @@ export const ShopProvider = ({ children }) => {
     categories,
     loading,
 
-    // Setters
-    setSearchQuery,
+    // Categories
+    categories,
+    selectedCategory,
     setSelectedCategory,
-    clearSearch, // PERBAIKAN: Tambahkan ini
+    refreshProducts,
+
+    // Search, // PERBAIKAN: Tambahkan ini
+    setSearchQuery,
+    clearSearch,
 
     // Cart functions
     addToCart,
