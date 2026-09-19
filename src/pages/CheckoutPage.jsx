@@ -182,7 +182,8 @@ const CheckoutPage = () => {
 
       let orderId;
       try {
-        const response = await fetch('http://localhost:8000/api/storefront/checkout', {
+        const API_URL = import.meta.env.VITE_API_URL || 'https://batik-kasir-backend.vercel.app/api';
+        const response = await fetch(`${API_URL}/storefront/checkout`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

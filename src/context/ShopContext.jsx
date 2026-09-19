@@ -28,9 +28,10 @@ export const ShopProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const API_URL = import.meta.env.VITE_API_URL || 'https://batik-kasir-backend.vercel.app/api';
         const [prodRes, catRes] = await Promise.all([
-          fetch('http://localhost:8000/api/storefront/products'),
-          fetch('http://localhost:8000/api/storefront/categories')
+          fetch(`${API_URL}/storefront/products`),
+          fetch(`${API_URL}/storefront/categories`)
         ]);
         
         const prodData = await prodRes.json();
@@ -46,7 +47,7 @@ export const ShopProvider = ({ children }) => {
               category: p.category ? p.category.slug : 'lainnya',
               categoryName: p.category ? p.category.name : 'Lainnya',
               image: p.image && !p.image.startsWith('http') 
-                ? `http://localhost:8000/storage/${p.image}` 
+                ? `${API_URL.replace('/api', '')}/storage/${p.image}` 
                 : p.image || fallbackImage,
               rating: 5,
               reviews: Math.floor(Math.random() * 100) + 10,
