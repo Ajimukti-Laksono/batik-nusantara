@@ -56,9 +56,30 @@ export const ShopProvider = ({ children }) => {
         }
 
         if (catData.success) {
+          const order = [
+            "batik-formal",
+            "batik-casual",
+            "batik-modern",
+            "batik-traditional",
+            "aksesoris-batik",
+          ];
+          const sortedCats = [...catData.data].sort((a, b) => {
+            const indexA = order.indexOf(a.slug);
+            const indexB = order.indexOf(b.slug);
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+            return a.name.localeCompare(b.name);
+          });
+
           setCategories([
             { id: "all", name: "Semua Produk", description: "Lihat semua koleksi batik kami" },
-            ...catData.data.map(c => ({ id: c.slug, name: c.name, description: c.description }))
+            ...sortedCats.map(c => ({ 
+              id: c.slug, 
+              name: c.name, 
+              description: c.description,
+              image: c.image 
+            }))
           ]);
         }
       } catch (err) {

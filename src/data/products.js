@@ -1,9 +1,29 @@
+// Normalize category slug for consistent filtering and routing
+export const normalizeCategorySlug = (slug) => {
+  if (!slug) return "";
+  const s = String(slug).toLowerCase().trim();
+  if (s === "all" || s === "semua" || s === "semua-produk") return "all";
+  if (s === "formal" || s === "batik-formal") return "batik-formal";
+  if (s === "casual" || s === "batik-casual") return "batik-casual";
+  if (s === "modern" || s === "batik-modern") return "batik-modern";
+  if (s === "traditional" || s === "batik-traditional") return "batik-traditional";
+  if (
+    s === "accessories" ||
+    s === "aksesoris" ||
+    s === "aksesoris-batik" ||
+    s === "batik-aksesoris"
+  ) {
+    return "aksesoris-batik";
+  }
+  return s;
+};
+
 // Product data
 export const productsData = [
   {
     id: 1,
     name: "Kemeja Batik Parang Modern",
-    category: "modern",
+    category: "batik-modern",
     categoryName: "Modern",
     price: 285000,
     originalPrice: 350000,
@@ -19,7 +39,7 @@ export const productsData = [
   {
     id: 2,
     name: "Dress Batik Mega Mendung",
-    category: "casual",
+    category: "batik-casual",
     categoryName: "Casual",
     price: 425000,
     originalPrice: 550000,
@@ -35,7 +55,7 @@ export const productsData = [
   {
     id: 3,
     name: "Blazer Batik Kombinasi",
-    category: "formal",
+    category: "batik-formal",
     categoryName: "Formal",
     price: 650000,
     originalPrice: 800000,
@@ -51,7 +71,7 @@ export const productsData = [
   {
     id: 4,
     name: "Sarung Batik Tulis Premium",
-    category: "traditional",
+    category: "batik-traditional",
     categoryName: "Traditional",
     price: 550000,
     originalPrice: 700000,
@@ -67,7 +87,7 @@ export const productsData = [
   {
     id: 5,
     name: "Kemeja Batik Kawung",
-    category: "formal",
+    category: "batik-formal",
     categoryName: "Formal",
     price: 320000,
     originalPrice: 400000,
@@ -83,7 +103,7 @@ export const productsData = [
   {
     id: 6,
     name: "Rok Batik Plisket",
-    category: "casual",
+    category: "batik-casual",
     categoryName: "Casual",
     price: 275000,
     originalPrice: 350000,
@@ -99,7 +119,7 @@ export const productsData = [
   {
     id: 7,
     name: "Blouse Batik Kombinasi",
-    category: "modern",
+    category: "batik-modern",
     categoryName: "Modern",
     price: 295000,
     originalPrice: 380000,
@@ -115,7 +135,7 @@ export const productsData = [
   {
     id: 8,
     name: "Kain Batik Tulis Solo",
-    category: "traditional",
+    category: "batik-traditional",
     categoryName: "Traditional",
     price: 850000,
     originalPrice: 1200000,
@@ -131,7 +151,7 @@ export const productsData = [
   {
     id: 9,
     name: "Tas Batik Canvas",
-    category: "accessories",
+    category: "aksesoris-batik",
     categoryName: "Accessories",
     price: 185000,
     originalPrice: 250000,
@@ -147,7 +167,7 @@ export const productsData = [
   {
     id: 10,
     name: "Celana Batik Kulot",
-    category: "casual",
+    category: "batik-casual",
     categoryName: "Casual",
     price: 265000,
     originalPrice: 340000,
@@ -163,7 +183,7 @@ export const productsData = [
   {
     id: 11,
     name: "Scarf Batik Sutera",
-    category: "accessories",
+    category: "aksesoris-batik",
     categoryName: "Accessories",
     price: 245000,
     originalPrice: 320000,
@@ -179,7 +199,7 @@ export const productsData = [
   {
     id: 12,
     name: "Outer Batik Kimono",
-    category: "modern",
+    category: "batik-modern",
     categoryName: "Modern",
     price: 385000,
     originalPrice: 480000,
@@ -202,27 +222,27 @@ export const categories = [
     description: "Lihat semua koleksi batik kami",
   },
   {
-    id: "formal",
+    id: "batik-formal",
     name: "Batik Formal",
-    description: "Koleksi batik untuk acara resmi",
+    description: "Koleksi batik untuk acara formal",
   },
   {
-    id: "casual",
+    id: "batik-casual",
     name: "Batik Casual",
     description: "Batik santai untuk sehari-hari",
   },
   {
-    id: "modern",
+    id: "batik-modern",
     name: "Batik Modern",
     description: "Desain batik kontemporer",
   },
   {
-    id: "traditional",
+    id: "batik-traditional",
     name: "Batik Traditional",
     description: "Batik klasik warisan budaya",
   },
   {
-    id: "accessories",
+    id: "aksesoris-batik",
     name: "Aksesoris Batik",
     description: "Pelengkap gaya dengan motif batik",
   },

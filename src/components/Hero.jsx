@@ -70,7 +70,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-light to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
               <button
-                onClick={() => navigate("/shop?category=traditional")}
+                onClick={() => navigate("/shop?category=batik-traditional")}
                 className="btn btn-secondary group hover:scale-105 transition-transform duration-300"
               >
                 Koleksi Premium

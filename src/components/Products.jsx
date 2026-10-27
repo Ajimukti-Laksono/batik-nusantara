@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Heart, Eye, ShoppingCart, Star } from "lucide-react";
 import { useShop } from "../context/ShopContext";
-import { formatPrice } from "../data/products";
+import { formatPrice, normalizeCategorySlug } from "../data/products";
 
 const Products = () => {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
@@ -24,7 +24,11 @@ const Products = () => {
   useEffect(() => {
     let filtered = products;
     if (selectedCategory && selectedCategory !== "all") {
-      filtered = filtered.filter((p) => p.category === selectedCategory);
+      filtered = filtered.filter(
+        (p) =>
+          normalizeCategorySlug(p.category) ===
+          normalizeCategorySlug(selectedCategory)
+      );
     }
     if (searchQuery) {
       filtered = filtered.filter(

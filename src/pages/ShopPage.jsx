@@ -10,7 +10,7 @@ import {
   SlidersHorizontal,
   X,
 } from "lucide-react";
-import { formatPrice } from "../data/products";
+import { formatPrice, normalizeCategorySlug } from "../data/products";
 
 const ShopPage = () => {
   const location = useLocation();
@@ -38,9 +38,13 @@ const ShopPage = () => {
   const filteredProducts = useMemo(() => {
     let filtered = products;
 
-    // Filter by category - PERBAIKAN: "all" menampilkan semua
+    // Filter by category - PERBAIKAN: "all" menampilkan semua, dan normalisasi slug
     if (selectedCategory && selectedCategory !== "all") {
-      filtered = filtered.filter((p) => p.category === selectedCategory);
+      filtered = filtered.filter(
+        (p) =>
+          normalizeCategorySlug(p.category) ===
+          normalizeCategorySlug(selectedCategory)
+      );
     }
 
     // Filter by search query - PERBAIKAN: Cek jika query kosong
@@ -85,7 +89,7 @@ const ShopPage = () => {
     }
 
     return sortedProducts;
-  }, [searchQuery, selectedCategory, sortBy, priceRange, selectedRating]); // Tambah dependency
+  }, [searchQuery, selectedCategory, sortBy, priceRange, selectedRating, products]); // Tambah dependency
 
   // Check if coming from category click or search
   useEffect(() => {
@@ -94,7 +98,7 @@ const ShopPage = () => {
     const search = params.get("search");
 
     if (category) {
-      setSelectedCategory(category);
+      setSelectedCategory(normalizeCategorySlug(category));
     } else {
       setSelectedCategory("all");
     }
@@ -104,7 +108,31 @@ const ShopPage = () => {
     } else {
       setSearchQuery("");
     }
-  }, [location.search, setSelectedCategory, setSearchQuery]); // Dependency on location.search string only
+  }, [location.search, setSelectedCategory, setSearchQuery]);
+
+  // Synchronize category selection with URL query
+  const handleCategorySelect = (categoryId) => {
+    const normalized = normalizeCategorySlug(categoryId);
+    setSelectedCategory(normalized);
+    const params = new URLSearchParams(location.search);
+    if (normalized && normalized !== "all") {
+      params.set("category", normalized);
+    } else {
+      params.delete("category");
+    }
+    const newSearch = params.toString();
+    navigate(newSearch ? `/shop?${newSearch}` : "/shop", { replace: true });
+  };
+
+  // Find active category details for title and display
+  const currentCategory = useMemo(() => {
+    if (!selectedCategory || selectedCategory === "all") return null;
+    return categories.find(
+      (c) =>
+        c.id === selectedCategory ||
+        normalizeCategorySlug(c.id) === normalizeCategorySlug(selectedCategory)
+    );
+  }, [categories, selectedCategory]);
 
   // Reset filters dengan benar
   const resetFilters = () => {
@@ -117,8 +145,6 @@ const ShopPage = () => {
     navigate("/shop");
   };
 
-
-
   return (
     <>
       <div className="min-h-screen bg-batik-cream pt-24 pb-12">
@@ -126,8 +152,10 @@ const ShopPage = () => {
           {/* Page Header */}
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-batik-dark mb-2">
-              {selectedCategory && selectedCategory !== "all"
-                ? `Batik ${categories.find((c) => c.id === selectedCategory)?.name}`
+              {currentCategory
+                ? currentCategory.name
+                : selectedCategory && selectedCategory !== "all"
+                ? "Koleksi Batik"
                 : "Semua Koleksi Batik"}
             </h1>
             <p className="text-batik-brown/70">
@@ -167,24 +195,40 @@ const ShopPage = () => {
                     Kategori
                   </h4>
                   <div className="space-y-2">
-                    {categories.map((category) => (
-                      <label
-                        key={category.id}
-                        className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"
-                      >
-                        <input
-                          type="radio"
-                          name="category"
-                          value={category.id}
-                          checked={selectedCategory === category.id}
-                          onChange={(e) => setSelectedCategory(e.target.value)}
-                          className="w-4 h-4 text-primary"
-                        />
-                        <span className="text-sm text-batik-brown">
-                          {category.name}
-                        </span>
-                      </label>
-                    ))}
+                    {categories.map((category) => {
+                      const isChecked =
+                        category.id === selectedCategory ||
+                        (category.id === "all" &&
+                          (!selectedCategory || selectedCategory === "all")) ||
+                        (category.id !== "all" &&
+                          normalizeCategorySlug(category.id) ===
+                            normalizeCategorySlug(selectedCategory));
+
+                      return (
+                        <label
+                          key={category.id}
+                          className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"
+                        >
+                          <input
+                            type="radio"
+                            name="category"
+                            value={category.id}
+                            checked={isChecked}
+                            onChange={() => handleCategorySelect(category.id)}
+                            className="w-4 h-4 text-primary"
+                          />
+                          <span
+                            className={`text-sm ${
+                              isChecked
+                                ? "text-primary font-semibold"
+                                : "text-batik-brown"
+                            }`}
+                          >
+                            {category.name}
+                          </span>
+                        </label>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -479,22 +523,43 @@ const ShopPage = () => {
               <div>
                 <h4 className="font-semibold text-batik-dark mb-3">Kategori</h4>
                 <div className="space-y-2">
-                  {categories.map((category) => (
-                    <label
-                      key={category.id}
-                      className="flex items-center gap-2 cursor-pointer"
-                    >
-                      <input
-                        type="radio"
-                        name="category-mobile"
-                        value={category.id}
-                        checked={selectedCategory === category.id}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="w-4 h-4 text-primary"
-                      />
-                      <span className="text-sm">{category.name}</span>
-                    </label>
-                  ))}
+                  {categories.map((category) => {
+                    const isChecked =
+                      category.id === selectedCategory ||
+                      (category.id === "all" &&
+                        (!selectedCategory || selectedCategory === "all")) ||
+                      (category.id !== "all" &&
+                        normalizeCategorySlug(category.id) ===
+                          normalizeCategorySlug(selectedCategory));
+
+                    return (
+                      <label
+                        key={category.id}
+                        className="flex items-center gap-2 cursor-pointer"
+                      >
+                        <input
+                          type="radio"
+                          name="category-mobile"
+                          value={category.id}
+                          checked={isChecked}
+                          onChange={() => {
+                            handleCategorySelect(category.id);
+                            setShowFilters(false);
+                          }}
+                          className="w-4 h-4 text-primary"
+                        />
+                        <span
+                          className={`text-sm ${
+                            isChecked
+                              ? "text-primary font-semibold"
+                              : "text-batik-brown"
+                          }`}
+                        >
+                          {category.name}
+                        </span>
+                      </label>
+                    );
+                  })}
                 </div>
               </div>
 

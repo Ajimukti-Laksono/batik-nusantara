@@ -1,21 +1,20 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { categories } from "../data/products";
+import { useShop } from "../context/ShopContext";
+import { categories as fallbackCategories, normalizeCategorySlug } from "../data/products";
 
 const Categories = () => {
   const navigate = useNavigate();
+  const { categories: contextCategories } = useShop();
 
-  const handleCategoryClick = (categoryId) => {
-    // Navigate to shop page with category parameter
-    navigate(`/shop?category=${categoryId}`);
-
-    // Scroll to top after navigation
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const availableCategories =
+    contextCategories && contextCategories.length > 1
+      ? contextCategories
+      : fallbackCategories;
 
   // Skip the 'all' category in display
-  const displayCategories = categories.filter((cat) => cat.id !== "all");
+  const displayCategories = availableCategories.filter((cat) => cat.id !== "all");
 
   // Image mapping for categories
   const imageMap = {
@@ -24,6 +23,29 @@ const Categories = () => {
     modern: "/images/categories/modern.jpg",
     traditional: "/images/categories/traditional.jpg",
     accessories: "/images/categories/aksesoris.jpg",
+    "batik-formal": "/images/categories/formal.jpg",
+    "batik-casual": "/images/categories/casual.jpg",
+    "batik-modern": "/images/categories/modern.jpg",
+    "batik-traditional": "/images/categories/traditional.jpg",
+    "aksesoris-batik": "/images/categories/aksesoris.jpg",
+  };
+
+  const getCategoryImage = (category) => {
+    return (
+      imageMap[category.id] ||
+      imageMap[normalizeCategorySlug(category.id)] ||
+      category.image ||
+      "/images/categories/formal.jpg"
+    );
+  };
+
+  const handleCategoryClick = (categoryId) => {
+    const slug = normalizeCategorySlug(categoryId);
+    // Navigate to shop page with category parameter
+    navigate(`/shop?category=${slug}`);
+
+    // Scroll to top after navigation
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -44,14 +66,20 @@ const Categories = () => {
           {displayCategories.map((category, index) => (
             <div
               key={category.id}
+              onClick={() => handleCategoryClick(category.id)}
               className="bg-gradient-to-br from-white to-batik-cream/50 rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-secondary/10 cursor-pointer group overflow-hidden transform hover:scale-[1.02] transition-all duration-300"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Image Container */}
               <div className="h-72 relative overflow-hidden bg-gradient-to-br from-batik-beige to-batik-sand">
                 <img
-                  src={imageMap[category.id]}
+                  src={getCategoryImage(category)}
                   alt={category.name}
+                  onError={(e) => {
+                    e.target.src =
+                      imageMap[normalizeCategorySlug(category.id)] ||
+                      "/images/categories/formal.jpg";
+                  }}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
 
@@ -65,7 +93,10 @@ const Categories = () => {
                 {/* Hover Overlay dengan gradient mewah */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-bronze/90 to-secondary/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <button
-                    onClick={() => handleCategoryClick(category.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCategoryClick(category.id);
+                    }}
                     className="bg-gradient-to-r from-white to-batik-cream text-primary px-8 py-3 rounded-xl font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
                   >
                     Lihat Koleksi
@@ -79,11 +110,14 @@ const Categories = () => {
                 <h3 className="text-xl font-bold bg-gradient-to-r from-batik-dark to-primary bg-clip-text text-transparent mb-2 group-hover:from-primary group-hover:to-bronze transition-all">
                   {category.name}
                 </h3>
-                <p className="text-batik-brown/80 text-sm mb-4 font-medium">
+                <p className="text-batik-brown/80 text-sm mb-4 font-medium line-clamp-2">
                   {category.description}
                 </p>
                 <button
-                  onClick={() => handleCategoryClick(category.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCategoryClick(category.id);
+                  }}
                   className="flex items-center bg-gradient-to-r from-primary to-bronze bg-clip-text text-transparent font-bold text-sm group-hover:gap-2 transition-all"
                 >
                   Lihat Koleksi

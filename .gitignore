@@ -44,3 +44,6 @@ coverage/
 *.swo
 *~
 .cache
+
+.vercel
+.env*.local
